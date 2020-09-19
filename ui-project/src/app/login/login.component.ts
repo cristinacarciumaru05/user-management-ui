@@ -1,6 +1,5 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
-import { MessageService } from 'primeng/api';
 import { AppService } from '../app-service';
 import { Tbu4001 } from '../DTO/Tbu4001';
 
@@ -18,27 +17,44 @@ export class LoginComponent {
     loggedUser: boolean;
 
     @Output() login = new EventEmitter<boolean>();
-    constructor(private service: AppService, private toast:ToastrService) {
+    constructor(private service: AppService, private toast: ToastrService) {
         this.loggedUser = false;
     }
 
     onSubmit() {
         let user = new Tbu4001();
-        user.email = this.email;
+        user.email = this.email ? this.email.trim() : null;
         user.password = this.password;
-        this.service.setLoggedUser(user).subscribe(message => {
-            if (message.message == 'Login') {
-                this.login.emit(true)
+        if (this.email == null || this.password == null) {
+            this.toast.warning('Please complete all the fields');
+        } else {
+            if (!this.validateEmail(this.email)) {
+                this.toast.warning('Invalid email adress');
             } else {
-                this.toast.error(message.message.toString())
-                console.log(message.message);
-                alert('asdasd');
+                this.service.setLoggedUser(user).subscribe(message => {
+                    if (message.message == 'Login') {
+                        this.login.emit(true)
+                    } else {
+                        this.toast.error(message.message.toString())
+                        console.log(message.message);
+                    }
+                });
             }
-        });
+
+        }
+
     }
 
     reset() {
-        this.email = '';
-        this.password = '';
+        this.email = null;
+        this.password = null;
+    }
+
+    validateEmail(email: String): boolean {
+        if (!email.match("^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$")) {
+            return false;
+        }
+        return true;
+
     }
 }

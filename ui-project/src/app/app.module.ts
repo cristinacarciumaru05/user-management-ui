@@ -7,7 +7,6 @@ import {InputMaskModule} from 'primeng/inputmask';
 import { FormsModule } from '@angular/forms';
 import {InputTextModule} from 'primeng/inputtext';
 import {RadioButtonModule} from 'primeng/radiobutton';
-import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import {ToastModule} from 'primeng/toast';
 import { MessageService } from 'primeng/api';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -16,6 +15,7 @@ import { HomeComponent } from './home/home.component';
 import { UserComponent } from './user-management/user.component';
 import { GroupComponent } from './group-management/group.component';
 import { ToastrModule } from 'ngx-toastr';
+import { PasswordModule } from 'primeng/password';
 
 
 @NgModule({
@@ -33,10 +33,11 @@ import { ToastrModule } from 'ngx-toastr';
     InputMaskModule,
     InputTextModule,
     RadioButtonModule,
-    AngularFontAwesomeModule,
     ToastModule,
     BrowserAnimationsModule,
-    ToastrModule.forRoot()
+    ToastrModule.forRoot({
+      timeOut: 3000}),
+    PasswordModule
 
   ],
   providers: [HttpClient, MessageService],
