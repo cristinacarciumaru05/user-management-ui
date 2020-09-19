@@ -1,0 +1,36 @@
+<div class="mt-5 row h-100 justify-content-center align-items-center ">
+    <div class=" h-50 w-50 row justify-content-center align-items-center login">
+        <table>
+            <tr>
+                <td class="spacing pr-2" >
+                    <span style="display: inline;">Email</span>
+                </td>
+                <td class="spacing">
+                    <input [(ngModel)]="email" type="text" size="50" pInputText>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="spacing pr-2" >
+                    <span style="display: inline;">Password</span>
+                </td>
+                <td class="spacing">
+                    <input [(ngModel)]="password" type="text" size="50" pInputText>
+                </td>
+            </tr>
+
+        <br/>
+            <tr>
+                <td class="spacing">
+
+                </td>
+                <td class="mt-5">
+                    <div class="row ml-4" style="width: 100px;display:inline">
+                        <button type="button" class="btn btn-primary ml-2 mr-4" (click)="onSubmit()">Submit</button>
+                        <button type="button" class="btn btn-primary" (click)="reset()">Reset</button>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
