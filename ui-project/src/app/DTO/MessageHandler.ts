@@ -1,4 +1,4 @@
 export class MessageHandler {
-    level: String;
-    message: String;
+    level: string;
+    message: string;
 }

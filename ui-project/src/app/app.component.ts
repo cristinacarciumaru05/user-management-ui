@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { MessageService } from 'primeng/api';
+import { MenuItem, MessageService } from 'primeng/api';
 import { AppService } from './app-service';
 import { Tbu4001 } from './DTO/Tbu4001';
 
@@ -10,11 +11,23 @@ import { Tbu4001 } from './DTO/Tbu4001';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
+
   title = 'ui-project';
   loggedUser: boolean;
-  constructor(private service: AppService) {
+  items=[];
+  activeItem: MenuItem;
+
+
+  constructor(private service: AppService,
+    private router: Router  ) {
     this.loggedUser = false;
     this.get();
+
+    this.items = [
+      {label: 'Home', icon: 'pi pi-fw pi-home', url: ['/home']},
+      {label: 'User', icon: 'pi pi-user-edit', url: ['/user']},
+      {label: 'Group', icon: 'pi pi-users', url: ['/group'], }
+  ];
   }
 
   get() {
@@ -26,8 +39,12 @@ export class AppComponent {
   logout() {
     this.service.logoutUser().subscribe(_ => { this.get() });
   }
+
   loginedUser() {
     this.loggedUser = true;
+    this.router.navigate(['/home']);
 
   }
+
+  
 }

@@ -4,5 +4,4 @@ export class Tbu4001 {
     f_name: String ='';
     email: String ='';
     password: String ='';
-    group: String ='';
 }

@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import {InputMaskModule} from 'primeng/inputmask';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {InputTextModule} from 'primeng/inputtext';
 import {RadioButtonModule} from 'primeng/radiobutton';
 import {ToastModule} from 'primeng/toast';
@@ -16,8 +16,16 @@ import { UserComponent } from './user-management/user.component';
 import { GroupComponent } from './group-management/group.component';
 import { ToastrModule } from 'ngx-toastr';
 import { PasswordModule } from 'primeng/password';
-
-
+import { TabMenuModule } from 'primeng/tabmenu';
+import { MenuModule } from 'primeng/menu';
+import { RouterModule, Routes } from '@angular/router';
+import { FieldsetModule } from 'primeng/fieldset';
+const routes: Routes = [
+  { path: 'home', component: HomeComponent },
+  { path: 'user', component: UserComponent },
+  { path: 'group', component: GroupComponent },
+  { path: "", component: LoginComponent}
+];
 @NgModule({
   declarations: [
     AppComponent,
@@ -34,13 +42,20 @@ import { PasswordModule } from 'primeng/password';
     InputTextModule,
     RadioButtonModule,
     ToastModule,
+    ReactiveFormsModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot({
       timeOut: 3000}),
-    PasswordModule
+    PasswordModule,
+    TabMenuModule,
+    MenuModule,
+    RouterModule.forRoot(routes),
+    FieldsetModule
+    
 
   ],
   providers: [HttpClient, MessageService],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  exports: [RouterModule]
 })
 export class AppModule { }

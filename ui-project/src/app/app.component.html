@@ -1,10 +1,27 @@
 <p-toast></p-toast>
 <div *ngIf="loggedUser; then logged else unauth" class="container h-100"></div>
 <ng-template #logged>
-    <button (click)="logout()">logout</button>
-    <app-home></app-home>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col">
+                <div class="row float-right">
+                    <button type="button" class="btn btn-primary mr-4" (click)="logout()">Logout</button>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <p-tabMenu [model]="items" ></p-tabMenu>
+            </div>
+        </div>
+    </div>
+    <div class="m-6">
+        <router-outlet></router-outlet>
+    </div>
+
 </ng-template>
 
 <ng-template #unauth>
-        <app-login (login)="loginedUser()"></app-login>
+    <app-login (login)="loginedUser()"></app-login>
 </ng-template>
