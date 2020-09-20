@@ -20,15 +20,12 @@ export class GroupComponent {
   fromGroup: String;
 
   userGroups: Tbugr001[];
-  groups: Tbgroups[];
+  groupsForUser: Tbugr001[]
+
+  findByEmail: String;
+  findByGroup: String;
 
   constructor(private service: AppService, private toast: ToastrService) {
-    this.service.getGroups().subscribe(result => {
-      this.groups = result;
-    })
-    this.service.getGroupsWithUser().subscribe(result => {
-      this.userGroups = result;
-    })
   }
 
   addUser() {
@@ -103,9 +100,6 @@ export class GroupComponent {
       }
     })
 
-    console.log(this.deleteEmail);
-    console.log(this.fromGroup);
-    console.log('=========================');
   }
 
   deleteGr() {
@@ -144,4 +138,15 @@ export class GroupComponent {
     return false;
   }
 
+  getUserGroups() {
+    this.service.getGroupsByUser(this.findByEmail).subscribe(result =>{
+      this.userGroups = result;
+    });
+  }
+
+  getGroupsForUser() {
+    this.service.findUserByGroup(this.findByGroup).subscribe(result =>{
+      this.groupsForUser = result;
+    });
+  }
 }

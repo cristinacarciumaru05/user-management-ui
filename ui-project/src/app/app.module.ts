@@ -20,6 +20,7 @@ import { TabMenuModule } from 'primeng/tabmenu';
 import { MenuModule } from 'primeng/menu';
 import { RouterModule, Routes } from '@angular/router';
 import { FieldsetModule } from 'primeng/fieldset';
+import { TableModule } from 'primeng/table';
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'user', component: UserComponent },
@@ -50,7 +51,8 @@ const routes: Routes = [
     TabMenuModule,
     MenuModule,
     RouterModule.forRoot(routes),
-    FieldsetModule
+    FieldsetModule,
+    TableModule
     
 
   ],

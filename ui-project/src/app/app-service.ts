@@ -54,4 +54,12 @@ export class AppService {
     deleteUserFromGroup(email: String, name:String): Observable<void> {
         return this.http.put<void>('http://localhost:8080/delete-user-from-group?email='+email+'&name='+name, null);
     }
+
+    getGroupsByUser(email: String): Observable<Tbugr001[]>{
+        return this.http.get<Tbgroups[]>('http://localhost:8080/get-group-by-user?email='+email);
+    }
+
+    findUserByGroup(name: String): Observable<Tbugr001[]>{
+        return this.http.get<Tbgroups[]>('http://localhost:8080/get-user-by-group?name='+name);
+    }
 }
