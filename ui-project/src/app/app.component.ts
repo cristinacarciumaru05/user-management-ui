@@ -16,18 +16,32 @@ export class AppComponent {
   loggedUser: boolean;
   items=[];
   activeItem: MenuItem;
-
+  user:Tbu4001;
 
   constructor(private service: AppService,
     private router: Router  ) {
     this.loggedUser = false;
-    this.get();
 
-    this.items = [
-      {label: 'Home', icon: 'pi pi-fw pi-home', url: ['/home']},
-      {label: 'User', icon: 'pi pi-user-edit', url: ['/user']},
-      {label: 'Group', icon: 'pi pi-users', url: ['/group'], }
-  ];
+    this.service.getLoggedUser().subscribe(user => {
+      this.loggedUser = user != new Tbu4001() && user!=null ? true : false;
+      this.user= user;
+
+      if(user!=null && user.email != 'admin') {
+        this.items = [
+          {label: 'Home', icon: 'pi pi-fw pi-home', url: ['/home']},
+          {label: 'User', icon: 'pi pi-user-edit', url: ['/user']}
+      ];
+      } else {
+        this.items = [
+          {label: 'Home', icon: 'pi pi-fw pi-home', url: ['/home']},
+          {label: 'User', icon: 'pi pi-user-edit', url: ['/user']},
+          {label: 'Group', icon: 'pi pi-users', url: ['/group'] }
+      ];
+      }
+
+      
+    });
+    
   }
 
   get() {
@@ -42,6 +56,21 @@ export class AppComponent {
 
   loginedUser() {
     this.loggedUser = true;
+    this.service.getLoggedUser().subscribe(user => {
+      if(user != null && user.email != 'admin') {
+        this.items = [
+          {label: 'Home', icon: 'pi pi-fw pi-home', url: ['/home']},
+          {label: 'User', icon: 'pi pi-user-edit', url: ['/user']}
+      ];
+      } else {
+        this.items = [
+          {label: 'Home', icon: 'pi pi-fw pi-home', url: ['/home']},
+          {label: 'User', icon: 'pi pi-user-edit', url: ['/user']},
+          {label: 'Group', icon: 'pi pi-users', url: ['/group'] }
+      ];
+      }
+    });
+    
     this.router.navigate(['/home']);
 
   }
