@@ -1,0 +1,14 @@
+.welcome {
+    color: mix(#fff,#1e54e9, 85%);
+	font-size: calc(1em + 10vw) ;  
+	font-weight: 50;
+	text-shadow: 
+		-0.0075em 0.0075em 0 mix(#fff, #1e54e9, 94%),
+		0.005em 0.005em 0 mix(#fff,#1e54e9, 60%),
+		0.01em 0.01em 0 mix(#fff,#1e54e9, 62%), 
+		0.015em 0.015em mix(#fff,#1e54e9, 64%), 
+		0.02em 0.02em 0 mix(#fff,#1e54e9, 66%), 
+		0.025em 0.025em 0 mix(#fff,#1e54e9, 68%),
+		0.03em 0.03em 0 mix(#fff,#1e54e9, 70%),
+		0.035em 0.035em 0 mix(#fff,#1e54e9, 72%);
+}
