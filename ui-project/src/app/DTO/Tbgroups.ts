@@ -1,4 +1,4 @@
-export class Groups {
+export class Tbgroups {
     id: number;
     name: String;
 }
