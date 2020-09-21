@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { AppService } from '../app-service';
 import { Tbgroups } from '../DTO/Tbgroups';
@@ -25,7 +26,12 @@ export class GroupComponent {
   findByEmail: String;
   findByGroup: String;
 
-  constructor(private service: AppService, private toast: ToastrService) {
+  constructor(private service: AppService, private toast: ToastrService, private router: Router) {
+    this.service.getLoggedUser().subscribe(user => {
+      if (user.email != 'admin') {
+        this.router.navigate(['/home']);
+      }
+    })
   }
 
   addUser() {
@@ -61,7 +67,7 @@ export class GroupComponent {
   createGr() {
     this.service.findGroup(this.createGroup).subscribe(exists => {
       if (exists == new Tbgroups() || exists == null) {
-        this.service.addGroup( this.createGroup).subscribe(
+        this.service.addGroup(this.createGroup).subscribe(
           _ => {
             this.toast.info('Success');
           }, err => {
@@ -103,22 +109,22 @@ export class GroupComponent {
   }
 
   deleteGr() {
-      this.service.findGroup(this.deleteGroup).subscribe(exists => {
-        if (exists != new Tbgroups() && exists != null) {
-          this.service.deleteGroup(this.deleteGroup).subscribe(
-            _ => {
-              this.toast.info('Success');
-            }, err => {
-              this.toast.error('Error');
-            }
-          );
-        }
-        else {
-          this.toast.warning('This group does not exist! Please try again')
-        }
-      });
+    this.service.findGroup(this.deleteGroup).subscribe(exists => {
+      if (exists != new Tbgroups() && exists != null) {
+        this.service.deleteGroup(this.deleteGroup).subscribe(
+          _ => {
+            this.toast.info('Success');
+          }, err => {
+            this.toast.error('Error');
+          }
+        );
+      }
+      else {
+        this.toast.warning('This group does not exist! Please try again')
+      }
+    });
 
-    
+
   }
 
 
@@ -138,8 +144,8 @@ export class GroupComponent {
   }
 
   getUserGroups() {
-    
-    this.service.getGroupsByUser(this.findByEmail).subscribe(result =>{
+
+    this.service.getGroupsByUser(this.findByEmail).subscribe(result => {
       this.userGroups = result;
     });
   }
@@ -148,7 +154,7 @@ export class GroupComponent {
 
     this.service.findGroup(this.findByGroup).subscribe(exists => {
       if (exists != new Tbgroups() && exists != null) {
-        this.service.findUserByGroup(this.findByGroup).subscribe(result =>{
+        this.service.findUserByGroup(this.findByGroup).subscribe(result => {
           this.groupsForUser = result;
         });
       }
@@ -157,6 +163,6 @@ export class GroupComponent {
       }
     });
 
-    
+
   }
 }
