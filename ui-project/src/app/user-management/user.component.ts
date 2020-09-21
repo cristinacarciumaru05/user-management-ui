@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { AppService } from '../app-service';
 import { Tbu4001 } from '../DTO/Tbu4001';
+import { Tbugr001 } from '../DTO/Tbugr001';
 
 @Component({
   selector: 'app-user',
@@ -12,15 +13,21 @@ export class UserComponent {
 
   user: Tbu4001;
   email: String;
+  existingUsers: Tbu4001[];
   constructor(private service: AppService, private toast: ToastrService) {
     this.user = new Tbu4001();
+
   }
 
   addUser() {
-    console.log(this.user);
     if (this.validateEmail(this.user.email)) {
-      this.service.addUser(this.user).subscribe(ret => {
-        console.log(ret)
+      this.service.addUser(this.user).subscribe(result => {
+        if("ERROR" == result.level) {
+          this.toast.error(result.message);
+        } else {
+          this.toast.info(result.message);
+          this.getUsers();
+        }
       })
     }
   }
@@ -38,6 +45,7 @@ export class UserComponent {
         if(res.level =='ERROR') {
           this.toast.error(res.message);
         } else {
+          this.getUsers();
           this.toast.info(res.message);
         }
       })
@@ -49,4 +57,11 @@ export class UserComponent {
       }
     }
   }
+
+  getUsers(){
+    this.service.getAllUsers().subscribe( users => {
+      this.existingUsers = users;
+    })
+  }
+
 }

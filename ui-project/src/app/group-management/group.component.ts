@@ -131,7 +131,6 @@ export class GroupComponent {
   }
 
   isAdmin(email: String) {
-    console.log(email)
     if (email == 'admin') {
       return true;
     }
@@ -139,14 +138,25 @@ export class GroupComponent {
   }
 
   getUserGroups() {
+    
     this.service.getGroupsByUser(this.findByEmail).subscribe(result =>{
       this.userGroups = result;
     });
   }
 
   getGroupsForUser() {
-    this.service.findUserByGroup(this.findByGroup).subscribe(result =>{
-      this.groupsForUser = result;
+
+    this.service.findGroup(this.findByGroup).subscribe(exists => {
+      if (exists != new Tbgroups() && exists != null) {
+        this.service.findUserByGroup(this.findByGroup).subscribe(result =>{
+          this.groupsForUser = result;
+        });
+      }
+      else {
+        this.toast.warning('This group does not exist! Please try again')
+      }
     });
+
+    
   }
 }

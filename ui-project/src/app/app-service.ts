@@ -32,8 +32,8 @@ export class AppService {
         return this.http.get<Tbgroups[]>('http://localhost:8080/get-groups-user');
     }
 
-    getGroupsWithUser(): Observable<Tbugr001[]> {
-        return this.http.get<Tbugr001[]>('http://localhost:8080/get-groups');
+    getAllGroups(): Observable<Tbgroups[]> {
+        return this.http.get<Tbgroups[]>('http://localhost:8080/get-groups');
     }
 
     findGroup(name:String): Observable<Tbgroups> {
@@ -62,4 +62,8 @@ export class AppService {
     findUserByGroup(name: String): Observable<Tbugr001[]>{
         return this.http.get<Tbgroups[]>('http://localhost:8080/get-user-by-group?name='+name);
     }
+    getAllUsers(): Observable<Tbu4001[]> {
+        return this.http.get<Tbu4001[]>('http://localhost:8080/get-users');
+    }
+    
 }

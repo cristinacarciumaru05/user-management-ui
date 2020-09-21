@@ -36,7 +36,6 @@ export class LoginComponent {
                         this.login.emit(true)
                     } else {
                         this.toast.error(message.message.toString())
-                        console.log(message.message);
                     }
                 });
             }
@@ -62,7 +61,6 @@ export class LoginComponent {
     }
 
     isAdmin(email: String) {
-        console.log(email)
         if( email == 'admin') {
             return true;
         }

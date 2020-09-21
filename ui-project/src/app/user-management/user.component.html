@@ -1,4 +1,3 @@
-
 <div class="container mt-4">
     <div class="row-flex">
 
@@ -7,43 +6,43 @@
             <div class="container mt-4">
                 <div class="row">
                     <div class="col-sm-4">
-    
+
                         <div class="row mt-2 justify-content-center">
                             <span>First name</span>
                         </div>
 
-                        <div class="row"><br/></div>
+                        <div class="row"><br /></div>
                         <div class="row mt-3 justify-content-center">
                             <span>Last name</span>
                         </div>
 
-                        <div class="row"><br/></div>
+                        <div class="row"><br /></div>
                         <div class="row mt-2 justify-content-center">
                             <span>Email</span>
                         </div>
 
-                        <div class="row"><br/></div>
+                        <div class="row"><br /></div>
                         <div class="row mt-3 justify-content-center">
                             <span>Password</span>
                         </div>
 
-                        
-                        <div class="row"><br/></div>
+
+                        <div class="row"><br /></div>
 
                     </div>
                     <div class="col-sm-8">
                         <input [(ngModel)]="user.f_name" type="text" size="50" pInputText>
-                        <div class="row"><br/></div>
-    
+                        <div class="row"><br /></div>
+
                         <input [(ngModel)]="user.l_name" type="text" size="50" pInputText>
-                        <div class="row"><br/></div>
-    
+                        <div class="row"><br /></div>
+
                         <input [(ngModel)]="user.email" type="text" size="50" pInputText>
-                        <div class="row"><br/></div>
+                        <div class="row"><br /></div>
 
                         <input [(ngModel)]="user.password" type="password" size="50" pInputText>
-                        <div class="row"><br/></div>
-    
+                        <div class="row"><br /></div>
+
                     </div>
                 </div>
                 <div class="row mx-auto mt-3" style="width: 100px;">
@@ -55,7 +54,7 @@
 
     </div>
 
-    <div class="row"><br/></div>
+    <div class="row"><br /></div>
 
     <div class="row-flex">
 
@@ -64,19 +63,19 @@
             <div class="container mt-4">
                 <div class="row">
                     <div class="col-sm-4">
-    
+
                         <div class="row mt-2 justify-content-center">
                             <span>Email</span>
                         </div>
 
-                        
+
 
                     </div>
                     <div class="col-sm-8">
                         <input [(ngModel)]="email" type="text" size="50" pInputText>
-                        <div class="row"><br/></div>
-    
-    
+                        <div class="row"><br /></div>
+
+
                     </div>
                 </div>
                 <div class="row mx-auto mt-3" style="width: 100px;">
@@ -85,6 +84,40 @@
             </div>
 
         </p-fieldset>
+
+        <div class="row"><br /></div>
+
+        <p-fieldset legend="All Users" [toggleable]="true" [collapsed]="true">
+
+            <div class="container mt-4 ">
+
+                <div class="row mx-auto mt-3 mb-3" style="width: 100px;">
+                    <button type="button" class="btn btn-primary" (click)="getUsers()">Get Users</button>
+                </div>
+
+                <p-table *ngIf="existingUsers" [value]="existingUsers">
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th>Email</th>
+                            <th>First name</th>
+                            <th>Last Name</th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-users>
+                        <tr>
+                            <td>{{users.email}}</td>
+                            <td>{{users.f_name}}</td>
+                            <td>{{users.l_name}}</td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+
+            </div>
+
+        </p-fieldset>
+
+        <div class="row"><br /></div>
+
         
     </div>
 </div>
